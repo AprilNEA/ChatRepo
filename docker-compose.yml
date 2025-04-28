@@ -1,0 +1,37 @@
+services:
+  # app:
+  #   container_name: chat-repo
+  #   image: ${DEV:+ghcr.io/uithub/chat-repo:dev}
+  #   build: ${DEV:+.}
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=postgres
+
+  db:
+    container_name: chat-repo-db
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - chat_repo_db_data:/var/lib/postgresql
+    restart: always
+
+  cache:
+    container_name: chat-repo-cache
+    image: redis:7-alpine
+    environment:
+      - "REDIS_ARGS=--appendonly yes"
+    ports:
+      - "6379:6379"
+    volumes:
+      - chat_repo_cache_data:/data
+    restart: always
+
+volumes:
+  chat_repo_db_data:
+  chat_repo_cache_data:
