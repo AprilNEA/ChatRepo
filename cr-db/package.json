@@ -1,0 +1,35 @@
+{
+  "name": "@chatrepo/db",
+  "type": "module",
+  "exports": {
+    "./schema": {
+      "import": {
+        "types": "./dist/schema.d.ts",
+        "default": "./dist/schema.js"
+      }
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "ts-map": "tsc --rootDir ./src --emitDeclarationOnly",
+    "dev": "bunchee -w --success \"npm run ts-map\"",
+    "build": "bunchee",
+    "push": "drizzle-kit push",
+    "migrate": "drizzle-kit migrate",
+    "generate": "drizzle-kit generate"
+  },
+  "dependencies": {
+    "drizzle-orm": "*",
+    "drizzle-zod": "*",
+    "zod": "*"
+  },
+  "devDependencies": {
+    "@chatrepo/tsconfig": "workspace:*",
+    "@types/node": "*",
+    "dotenv": "^16.4.7",
+    "bunchee": "*",
+    "drizzle-kit": "*",
+    "tsx": "*",
+    "typescript": "*"
+  }
+}

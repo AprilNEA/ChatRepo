@@ -2,7 +2,7 @@ import type { Job } from "bullmq";
 import { QueueEnum, createQueue, createWorker } from "./utils";
 import { getTrend } from "@/lib/get-trend";
 import db from "../db";
-import { type NewRepo, repo as repoTable } from "../db/schema";
+import { type NewRepo, repo as repoTable } from "../../../cr-db/src/schema";
 import { eq } from "drizzle-orm";
 import { queue as converterQueue } from "./converter";
 

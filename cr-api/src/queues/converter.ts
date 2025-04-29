@@ -1,6 +1,6 @@
 import type { Job } from "bullmq";
 import { QueueEnum, createQueue, createWorker } from "./utils";
-import { type Repo, repo as repoTable } from "../db/schema";
+import { type Repo, repo as repoTable } from "../../../cr-db/src/schema";
 import { getRepositoryContents } from "@/lib/uithub";
 import db from "../db";
 import { eq } from "drizzle-orm";

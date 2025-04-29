@@ -1,16 +1,28 @@
 {
   "name": "chatrepo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "description": "Chat with the latest trending GitHub repositories through a simple chat interface.",
+  "keywords": [
+    "chat",
+    "github",
+    "ai",
+    "agent"
+  ],
+  "author": "AprilNEA",
+  "license": "MIT",
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
-    "@biomejs/biome": "1.9.4"
+    "dotenv": "^16.4.5",
+    "@biomejs/biome": "1.9.4",
+    "drizzle-orm": "^0.41.0",
+    "drizzle-zod": "^0.7.1"
+  },
+  "dependencies": {
+    "@types/node": "^20.16.13",
+    "bunchee": "^6.0.3",
+    "drizzle-kit": "^0.28.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.8.3",
+    "zod": "^3.24.3"
   }
 }

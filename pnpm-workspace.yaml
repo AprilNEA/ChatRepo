@@ -1,3 +1,5 @@
 packages:
   - 'cr-web'
   - 'cr-api'
+  - 'cr-db'
+  - 'cr-tsconfig'
