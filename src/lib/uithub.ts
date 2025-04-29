@@ -1,5 +1,3 @@
-import useSWR from "swr";
-
 interface Author {
 	login: string;
 	avatarUrl: string;
@@ -55,37 +53,12 @@ const fetcher = async (url: string) => {
 	return response.json();
 };
 
-export function useRepositoryContents(
+export function getRepositoryContents(
 	owner: string,
 	repo: string,
 	branch?: string,
 	path?: string,
 ) {
 	const url = `https://uithub.com/${owner}/${repo}/tree/${branch || "main"}/${path || ""}`;
-	return useSWR(url, fetcher);
-}
-
-export function useRelevantContents(
-	owner: string,
-	repo: string,
-	threadType: "issues" | "discussions",
-	number: string,
-) {
-	const url = `https://uithub.com/${owner}/${repo}/${threadType}/${number}`;
-	return useSWR(url, fetcher);
-}
-
-export function useListItems(
-	owner: string,
-	repo: string,
-	itemType: "issues" | "pulls" | "discussions",
-	page: number = 1,
-	query?: string,
-) {
-	const params = new URLSearchParams();
-	if (page > 1) params.append("page", page.toString());
-	if (query) params.append("q", query);
-
-	const url = `https://uithub.com/${owner}/${repo}/${itemType}?${params.toString()}`;
-	return useSWR<ListResponse, Error>(url, fetcher);
+	return fetcher(url);
 }
