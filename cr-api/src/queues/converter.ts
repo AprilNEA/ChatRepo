@@ -1,8 +1,8 @@
 import type { Job } from "bullmq";
 import { QueueEnum, createQueue, createWorker } from "./utils";
-import { type Repo, repo as repoTable } from "@/db/schema";
+import { type Repo, repo as repoTable } from "../db/schema";
 import { getRepositoryContents } from "@/lib/uithub";
-import db from "@/db";
+import db from "../db";
 import { eq } from "drizzle-orm";
 
 const queue = createQueue(QueueEnum.CONVERTER);

@@ -1,5 +1,5 @@
 import { streamText } from "ai";
-import { anthropic } from "@ai-sdk/anthropic";
+
 import type { NextRequest } from "next/server";
 
 export const runtime = "edge";

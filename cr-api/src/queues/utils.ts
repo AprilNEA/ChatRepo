@@ -1,4 +1,4 @@
-import { redisConfig } from "@/db/redis";
+import { redisConfig } from "../db/redis";
 import { type Processor, Queue, Worker } from "bullmq";
 
 export enum QueueEnum {

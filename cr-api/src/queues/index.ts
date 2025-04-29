@@ -1,7 +1,7 @@
-import { queue as repoQueue } from "./trend-tracker";
+import { queue as repoQueue } from "./trend-tracker.js";
 
 export default async () => {
-	const { worker: repoWorker } = await import("./trend-tracker");
+	const { worker: repoWorker } = await import("./trend-tracker.js");
 	repoQueue.upsertJobScheduler(
 		"trend-tracker-daily-trend-tracker-daily",
 		{

@@ -1,0 +1,3 @@
+packages:
+  - 'cr-web'
+  - 'cr-api'
