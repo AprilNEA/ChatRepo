@@ -6,6 +6,7 @@ import {
 	CardHeader,
 	CardContent,
 	CardFooter,
+	CardTitle,
 } from "./components/ui/card";
 import { ChatMessageList } from "@/components/ui/chat/chat-message-list";
 import { ChatInput } from "@/components/ui/chat/chat-input";
@@ -17,6 +18,10 @@ import {
 import { TrendList } from "@/components/trend-list";
 import useRepo from "@/hooks/use-repo";
 import useSWR from "swr";
+import SettingsPanel from "./components/settings";
+import { CogIcon } from "lucide-react";
+import { useHC } from "./lib/hono-swr";
+import apiClient from "./lib/api-client";
 
 interface Message {
 	id: string;
@@ -26,6 +31,7 @@ interface Message {
 
 function ChatUI({ repoContent }: { repoContent: string }) {
 	const { messages, input, handleInputChange, handleSubmit, status } = useChat({
+		api: "/api/chat",
 		initialMessages: [
 			{
 				id: "1",
@@ -95,21 +101,18 @@ function ChatUI({ repoContent }: { repoContent: string }) {
 export default function App() {
 	const { repo, setRepo } = useRepo();
 
-	// const { data } = useSWR(repo ? `/api/content/${repo}` : null, (url) => {
-	//   return fetch(url, {
-	//     headers: {
-	//       Accept: "text/plain",
-	//     },
-	//   }).then((res) => res.text());
-	// });
+	const { data } = useHC(apiClient.repo.list.$get, {});
 
 	return (
 		<main className="flex max-h-screen flex-col items-center justify-center p-4 sm:p-8">
 			<Card className="w-full max-w-4xl">
 				<CardHeader className="border-b">
-					<h2 className="text-2xl font-semibold">
-						Chat with the most popular GitHub repository of the moment
-					</h2>
+					<CardTitle className="flex items-center justify-between">
+						<h2 className="text-2xl font-semibold">
+							Chat with the most popular GitHub repository of the moment
+						</h2>
+						<SettingsPanel />
+					</CardTitle>
 					{repo && (
 						<div className="mt-4 p-4 bg-muted rounded-lg flex items-center gap-4">
 							<div className="flex-shrink-0">
@@ -132,15 +135,15 @@ export default function App() {
 						</div>
 					)}
 				</CardHeader>
-				{/* {repo ? (
-          data ? (
-            <ChatUI repoContent={data} />
-          ) : (
-            <p>Loading...</p>
-          )
-        ) : (
-          <TrendList />
-        )} */}
+				{repo ? (
+					data ? (
+						<ChatUI repoContent={data} />
+					) : (
+						<p>Loading...</p>
+					)
+				) : (
+					<TrendList />
+				)}
 			</Card>
 		</main>
 	);
