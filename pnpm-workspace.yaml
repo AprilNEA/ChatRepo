@@ -1,5 +1,7 @@
 packages:
-  - 'cr-web'
-  - 'cr-api'
-  - 'cr-db'
-  - 'cr-tsconfig'
+  - cr-web
+  - cr-api
+  - cr-db
+  - cr-tsconfig
+patchedDependencies:
+  hono: patches/hono.patch

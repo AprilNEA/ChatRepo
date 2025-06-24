@@ -21,8 +21,14 @@
     "@types/node": "^20.16.13",
     "bunchee": "^6.0.3",
     "drizzle-kit": "^0.28.1",
+    "hono": "4.7.6",
     "tsx": "^4.19.2",
     "typescript": "^5.8.3",
     "zod": "^3.24.3"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "hono@4.7.6": "patches/hono.patch"
+    }
   }
 }

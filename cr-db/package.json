@@ -2,12 +2,7 @@
   "name": "@chatrepo/db",
   "type": "module",
   "exports": {
-    "./schema": {
-      "import": {
-        "types": "./dist/schema.d.ts",
-        "default": "./dist/schema.js"
-      }
-    }
+    "./schema": "./src/schema.ts"
   },
   "files": ["dist"],
   "scripts": {
