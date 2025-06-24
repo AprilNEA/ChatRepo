@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useRef, useState } from "react";
 import { X, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
