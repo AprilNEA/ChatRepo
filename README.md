@@ -3,6 +3,8 @@
 
 # Chat With GitHub Trend
 
+![demo](./docs/images/demo.png)
+
 This project enables developers to chat with trending GitHub repositories using AI assistance. It automatically tracks GitHub's trending repositories and provides intelligent chat interfaces to help you understand, explore, and work with popular open-source projects.
 
 ## 🤩 Overview
