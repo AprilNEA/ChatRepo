@@ -50,6 +50,9 @@ const app = appFactory
   .get("/list", async (c) => {
     const db = c.get("db");
     const repos = await db.query.repo.findMany({
+      with: {
+        repoContext: true,
+      },
       orderBy: (t, { desc }) => [
         desc(t.updatedAt),
         desc(t.createdAt),

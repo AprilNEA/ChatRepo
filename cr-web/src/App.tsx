@@ -22,6 +22,8 @@ import SettingsPanel from "./components/settings";
 import { CogIcon } from "lucide-react";
 import { useHC } from "./lib/hono-swr";
 import apiClient from "./lib/api-client";
+import { useEffect, useState } from "react";
+import type { InferResponseType } from "hono";
 
 interface Message {
 	id: string;
@@ -29,14 +31,58 @@ interface Message {
 	content: string;
 }
 
-function ChatUI({ repoContent }: { repoContent: string }) {
+type RepoContent = InferResponseType<typeof apiClient.repo.list.$get>[number];
+
+function ChatUI({ repoContent }: { repoContent: RepoContent }) {
+	// Create a comprehensive initial message based on repository data
+	const createInitialMessage = (repo: RepoContent): string => {
+		if (!repo) return "Hello! I'm ready to help you explore repositories.";
+		
+		const repoInfo = `🚀 **Repository**: ${repo.fullName}
+⭐ **Stars**: ${repo.stars?.toLocaleString() || 0}
+💬 **Description**: ${repo.description || "No description available"}
+🔗 **URL**: ${repo.url}
+${repo.language ? `💻 **Primary Language**: ${repo.language}` : ""}
+${repo.avatarUrl ? `👤 **Owner**: ${repo.owner}` : ""}
+
+---
+
+I'm your GitHub Repository Expert Assistant! I can help you:
+
+✨ **Understand the codebase** - Explain architecture, patterns, and implementation details
+📚 **Navigate the project** - Guide you through key files and components  
+🛠️ **Development support** - Suggest improvements and best practices
+🎯 **Getting started** - Help with setup, installation, and usage
+📖 **Documentation** - Explain README files and project structure
+
+${repo.repoContext?.[0]?.content ? `
+
+**Repository Analysis Available**: I have detailed information about this repository's structure, files, and codebase ready to help answer your questions.
+
+` : `
+
+**Note**: Detailed repository analysis is being processed. I can still help with general questions about the project!
+
+`}
+
+**What would you like to know about ${repo.fullName}?** 
+
+Some suggestions:
+• "Explain the project structure and main components"
+• "How do I get started with this repository?"
+• "What are the key features and technologies used?"
+• "Show me the most important files to understand first"`;
+
+		return repoInfo;
+	};
+
 	const { messages, input, handleInputChange, handleSubmit, status } = useChat({
 		api: "/api/chat",
 		initialMessages: [
 			{
 				id: "1",
 				role: "assistant",
-				content: repoContent,
+				content: createInitialMessage(repoContent),
 			},
 		],
 	});
@@ -103,6 +149,17 @@ export default function App() {
 
 	const { data } = useHC(apiClient.repo.list.$get, {});
 
+	const [repoContent, setRepoContent] = useState<RepoContent | null>(null);
+
+	useEffect(() => {
+		if (repo) {
+			const repoData = data?.find((r) => r.fullName === repo);
+			if (repoData) {
+				setRepoContent(repoData);
+			}
+		}
+	}, [repo, data]);
+
 	return (
 		<main className="flex max-h-screen flex-col items-center justify-center p-4 sm:p-8">
 			<Card className="w-full max-w-4xl">
@@ -135,15 +192,7 @@ export default function App() {
 						</div>
 					)}
 				</CardHeader>
-				{repo ? (
-					data ? (
-						<ChatUI repoContent={data} />
-					) : (
-						<p>Loading...</p>
-					)
-				) : (
-					<TrendList />
-				)}
+				{repo ? (repoContent ? <ChatUI repoContent={repoContent} /> : <p>Loading...</p>) : <TrendList />}
 			</Card>
 		</main>
 	);

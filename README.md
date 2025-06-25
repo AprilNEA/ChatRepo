@@ -3,15 +3,42 @@
 
 # Chat With GitHub Trend
 
-Chat with the latest trending GitHub repositories through a simple chat interface.
+This project enables developers to chat with trending GitHub repositories using AI assistance. It automatically tracks GitHub's trending repositories and provides intelligent chat interfaces to help you understand, explore, and work with popular open-source projects.
 
-## Overview
+## 🤩 Overview
 
-WIP demo picture
+### ✨ Current Features
 
-## Deploy
+- 🔥 **Auto GitHub Trending Import** - Daily automatic import of trending repositories via BullMQ
+- 🤖 **AI Chat Interface** - Interactive chat with repository content using LLM integration
+- 📊 **Repository Analysis** - Intelligent processing of repository structure and content
+- 🌐 **REST API** - Complete API for repository management and chat functionality
+- ⚡ **Real-time Updates** - Live repository data and chat responses
+
+### 🚀 Planned Features
+- 🔍 **Repository Search** - Browse and select from trending repositories
+- 📝 **Markdown Rendering** - Rich markdown support for repository documentation
+- 🎨 **Syntax Highlighting** - Code block highlighting for better readability
+- 📂 **File Explorer** - Interactive repository file tree navigation
+- 🔗 **Deep Linking** - Direct links to specific files and code sections
+- 📊 **Analytics Dashboard** - Repository metrics and trending insights
+- 🔔 **Notifications** - Alerts for new trending repositories
+- 🌙 **Dark/Light Theme** - Theme switching support
+- 💾 **Chat History** - Persistent conversation history
+- 🚀 **Multi-language Support** - Internationalization for global users
+  
+
+## Development
 
 ### Step 1
+
+```bash
+git clone https://github.com/AprilNEA/ChatRepo.git
+cd chatrepo
+pnpm install
+```
+
+### Step 2
 
 Ensure a `.env` file is present in the root of the project.
 
@@ -19,7 +46,15 @@ Ensure a `.env` file is present in the root of the project.
 cp .env.example .env
 ```
 
-### Step 2
+### Step 3
+
+Init database
+
+```bash
+pnpm run db:push
+```
+
+### Step 4
 
 ```bash
 docker compose up -d
