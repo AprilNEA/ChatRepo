@@ -50,17 +50,20 @@ cp .env.example .env
 
 ### Step 3
 
+Run docker compose to start the necessary services.
+
+```bash
+docker compose up -d
+```
+
+### Step 4
+
 Init database
 
 ```bash
 pnpm run db:push
 ```
 
-### Step 4
-
-```bash
-docker compose up -d
-```
 
 ## Architecture
 
